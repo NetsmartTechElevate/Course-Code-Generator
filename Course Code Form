@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Course Code Form</title>
+</head>
+<style>
+    body {
+      font-family: Helvetica;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: inline-block;
+      width: 200px;
+      text-align: right;
+    }
+
+    select,
+    input[type="text"],
+    textarea {
+      width: 400px;
+      font-size: 15px;
+    }
+
+    input[type="submit"] {
+      margin-left: 200px;
+    }
+
+    #output {
+      border: 1px solid #ccc;
+      padding: 10px;
+      width: 500px;
+      background-color: #f9f9f9;
+    }
+</style>
+<body>
+  <h1>Course Code Form</h1>
+  <form id="myForm">
+    <label for="type">Internal/External:</label>
+    <select id="type" name="type" required="true">
+      <option value="NTST">NTST</option>
+      <option value="LinkedInLearning">LinkedIn Learning</option>
+      <option value="External">External</option>
+    </select><br><br>
+
+    <label for="subject">Subject or Topic:</label>
+    <input type="text" id="subject" name="subject" maxlength="20" required="true"><br><br>
+
+    <label for="title">Title of Course:</label>
+    <textarea id="title" name="title" required="true" maxlength="30"></textarea><br><br>
+
+    <label for="sequence">If Series, Add Sequence:</label>
+    <select id="sequence" name="sequence" required="true">
+      <option value="I" selected>I</option>
+      <option value="II">II</option>
+      <option value="III">III</option>
+      <option value="IV">IV</option>
+      <option value="V">V</option>
+      <option value="VI">VI</option>
+      <option value="VII">VII</option>
+      <option value="VIII">VIII</option>
+      <option value="IX">IX</option>
+      <option value="X">X</option>
+    </select><br><br>
+
+    <label for="initials">Initials of Content Owner:</label>
+    <input type="text" id="initials" name="initials" required="true" maxlength="3"><br><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <h2>Course Code:</h2>
+  <div id="output"></div>
+<script>
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var type = document.getElementById("type").value;
+      var subject = document.getElementById("subject").value;
+      var title = document.getElementById("title").value;
+      var sequence = document.getElementById("sequence").value;
+      var initials = document.getElementById("initials").value;
+
+      var words = title.split(" ");
+      var titleFirstLetters = words[0].substring(0, 3) + words.slice(1).map(word => word.charAt(0)).join("");
+
+      var outputDiv = document.getElementById("output");
+      var output = type + "-" + subject + "-" + titleFirstLetters + "-" + sequence + "-" + initials;
+      outputDiv.textContent = output;
+    });
+    </script>
+</body>
+
+</html>
